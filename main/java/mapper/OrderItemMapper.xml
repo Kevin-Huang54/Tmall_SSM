@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.OrderItemMapper">
+    <select id="list" parameterType="_int" resultType="OrderItem">
+        select * from orderItem where oid=#{oid}
+    </select>
+
+    <select id="listByPid" parameterType="_int" resultType="OrderItem">
+        select * from orderItem where pid=#{pid}
+    </select>
+
+    <select id="getSaleCount" parameterType="_int" resultType="Integer">
+        select sum(number) from orderItem where pid=#{pid} and oid is not null
+    </select>
+
+    <select id="listByUid" parameterType="_int" resultType="OrderItem">
+        select * from orderItem where uid=#{uid}
+    </select>
+
+    <!--oid为null的项目为购物车内产品-->
+    <select id="listCartByUid" parameterType="_int" resultType="OrderItem">
+        select * from orderItem where uid=#{uid} and oid is null
+    </select>
+
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="OrderItem" >
+        insert into orderItem (pid,uid,number)
+        values (#{pid},#{uid},#{number})
+        </insert>
+
+    <delete id="delete">
+        delete from orderItem where id= #{id}
+        </delete>
+
+    <select id="get" parameterType="_int" resultType="OrderItem">
+        select * from orderItem where id=#{id}
+    </select>
+
+    <select id="getByUserAndProduct" resultType="OrderItem">
+        select * from orderItem where uid=#{uid} and pid=#{pid} and oid is null
+    </select>
+
+    <update id="update" parameterType="OrderItem" >
+        update orderItem set
+        oid=#{oid},
+        pid=#{pid},
+        uid=#{uid},
+        number=#{number}
+        where id=#{id}
+    </update>
+
+    <update id="updateCart" parameterType="OrderItem" >
+        update orderItem set
+        pid=#{pid},
+        uid=#{uid},
+        number=#{number}
+        where id=#{id}
+    </update>
+</mapper>
