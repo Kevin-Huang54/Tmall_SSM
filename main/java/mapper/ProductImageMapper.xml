@@ -10,17 +10,17 @@
 
     <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="ProductImage" >
         insert into productImage ( type, pid ) values (#{type}, #{pid})
-        </insert>
+    </insert>
 
     <delete id="delete">
         delete from productImage where id= #{id}
-        </delete>
+    </delete>
 
     <select id="get" parameterType="_int" resultType="ProductImage">
         select * from productImage where id=#{id}
-        </select>
+    </select>
 
     <update id="update" parameterType="ProductImage" >
         update productImage set type=#{type}, pid=#{pid} where id=#{id}
-        </update>
+    </update>
 </mapper>
