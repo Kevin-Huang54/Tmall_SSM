@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.OrderMapper">
+    <select id="list" parameterType="_int" resultType="Order">
+        select * from order_
+    </select>
+
+    <select id="listByStatus" resultType="Order">
+        select * from order_ where uid=#{uid} and status=#{status}
+    </select>
+
+    <select id="listByUid" parameterType="_int" resultType="Order">
+        select * from order_ where uid=#{uid} and status != 'delete'
+    </select>
+
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="Order" >
+        insert into order_ (uid,orderCode,address,post,receiver,mobile,userMessage,createDate,payDate,deliveryDate,confirmDate,status)
+        values (#{uid},#{orderCode},#{address},#{post},#{receiver},#{mobile},#{userMessage},#{createDate},#{payDate},#{deliveryDate},#{confirmDate},#{status})
+    </insert>
+
+    <delete id="delete">
+        delete from order_ where id= #{id}
+        </delete>
+
+    <select id="get" parameterType="_int" resultType="Order">
+        select * from order_ where id=#{id}
+    </select>
+
+    <update id="update" parameterType="Order" >
+        update order_ set
+        uid=#{uid},
+        orderCode=#{orderCode},
+        address=#{address},
+        post=#{post},
+        receiver=#{receiver},
+        mobile=#{mobile},
+        userMessage=#{userMessage},
+        createDate=#{createDate},
+        payDate=#{payDate},
+        deliveryDate=#{deliveryDate},
+        confirmDate=#{confirmDate},
+        status=#{status}
+        where id=#{id}
+    </update>
+</mapper>
