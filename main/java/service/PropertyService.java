@@ -4,6 +4,7 @@ import pojo.Property;
 
 import java.util.List;
 
+//属性的基本增删改查
 public interface PropertyService {
     void add(Property property);
     void delete(int id);

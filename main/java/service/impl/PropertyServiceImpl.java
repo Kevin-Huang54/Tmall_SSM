@@ -9,6 +9,7 @@ import service.PropertyService;
 import java.util.List;
 
 @Service
+//属性的基本增删改查
 public class PropertyServiceImpl implements PropertyService {
     @Autowired
     PropertyMapper propertyMapper;
