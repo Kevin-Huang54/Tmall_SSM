@@ -21,7 +21,7 @@
     </update>
 
     <select id="list" resultType="Review">
-        select * from review order by id desc
+        select * from review where pid=#{pid} order by id desc
     </select>
 
     <select id="getCount" parameterType="_int" resultType="_int">
